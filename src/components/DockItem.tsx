@@ -8,16 +8,18 @@ interface DockItemProps {
     icon: LucideIcon;
     name: string;
   };
+  onClick: () => void;
 }
 
-const DockItem: React.FC<DockItemProps> = ({ app }) => {
+const DockItem: React.FC<DockItemProps> = ({ app, onClick }) => {
   const Icon = app.icon;
   
   return (
     <motion.div
-      className="w-12 h-12 flex items-center justify-center relative group"
+      className="w-12 h-12 flex items-center justify-center relative group cursor-pointer"
       whileHover={{ scale: 1.2 }}
       whileTap={{ scale: 0.95 }}
+      onClick={onClick}
     >
       <Icon className="w-8 h-8 text-white" />
       <div className="absolute -top-8 opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 text-white text-xs px-2 py-1 rounded whitespace-nowrap">

@@ -3,6 +3,10 @@ import { motion } from 'framer-motion';
 import { Store, MessageCircle, Camera, Globe, Settings } from 'lucide-react';
 import DockItem from './DockItem';
 
+interface DockProps {
+  onAppStoreClick: () => void;
+}
+
 const dockApps = [
   { id: 'messages', icon: MessageCircle, name: 'Messages' },
   { id: 'safari', icon: Globe, name: 'Safari' },
@@ -11,7 +15,13 @@ const dockApps = [
   { id: 'settings', icon: Settings, name: 'Settings' },
 ];
 
-const Dock: React.FC = () => {
+const Dock: React.FC<DockProps> = ({ onAppStoreClick }) => {
+  const handleClick = (id: string) => {
+    if (id === 'appstore') {
+      onAppStoreClick();
+    }
+  };
+
   return (
     <motion.div 
       className="fixed bottom-4 left-1/2 transform -translate-x-1/2"
@@ -21,7 +31,11 @@ const Dock: React.FC = () => {
     >
       <div className="flex space-x-2 bg-white/20 backdrop-blur-xl p-2 rounded-2xl">
         {dockApps.map((app) => (
-          <DockItem key={app.id} app={app} />
+          <DockItem 
+            key={app.id} 
+            app={app} 
+            onClick={() => handleClick(app.id)}
+          />
         ))}
       </div>
     </motion.div>
