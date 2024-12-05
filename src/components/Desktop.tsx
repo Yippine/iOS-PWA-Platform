@@ -26,7 +26,7 @@ const Desktop: React.FC = () => {
           backgroundPosition: 'center'
         }}
       >
-        <div className="grid grid-cols-6 gap-4 p-4">
+        <div className="absolute inset-0 p-5">
           {apps.map((app) => (
             <AppIcon 
               key={app.id} 
